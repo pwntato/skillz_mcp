@@ -1,0 +1,30 @@
+# Virtual Environment
+.venv
+.direnv
+/env/
+/venv/
+/ENV/
+/env.bak/
+/venv.bak/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Editor configuration
+.vscode/
+.idea/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Logs
+*.log
+
+# Environment variables
+.env
+.envrc
