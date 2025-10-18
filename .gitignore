@@ -28,3 +28,7 @@ dist/
 # Environment variables
 .env
 .envrc
+
+# Ignore all directories in skillz/ except sample_skill/
+skillz/*/
+!skillz/sample_skill/
