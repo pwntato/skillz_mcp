@@ -1,3 +1,5 @@
 fastapi
 uvicorn[standard]
 python-frontmatter
+pytest
+httpx

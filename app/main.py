@@ -11,7 +11,7 @@ def read_root():
 
 @app.get("/skills")
 def list_skills():
-    skills_dir = Path("/skillz")
+    skills_dir = Path(os.getenv("SKILLZ_DIR", "/skillz"))
     if not skills_dir.is_dir():
         return {"error": "skillz directory not found"}
 
@@ -34,7 +34,7 @@ def list_skills():
 
 @app.get("/skills/{skill_id}/{file_path:path}")
 def get_skill_file(skill_id: str, file_path: str):
-    skill_dir = Path("/skillz") / skill_id
+    skill_dir = Path(os.getenv("SKILLZ_DIR", "/skillz")) / skill_id
     if not skill_dir.is_dir():
         raise HTTPException(status_code=404, detail="Skill not found")
 
