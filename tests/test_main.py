@@ -29,9 +29,9 @@ def skillz_test_dir_fixture(tmp_path):
 
 
 def test_read_root(client):
-    response = client.get("/")
-    assert response.status_code == 200
-    assert response.json() == {"Hello": "World"}
+    response = client.get("/", follow_redirects=False)
+    assert response.status_code == 307
+    assert response.headers["location"] == "/docs"
 
 def test_list_skills(client):
     response = client.get("/skills")
