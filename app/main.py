@@ -1,5 +1,7 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 import os
+import frontmatter
+from pathlib import Path
 
 app = FastAPI()
 
@@ -7,9 +9,38 @@ app = FastAPI()
 def read_root():
     return {"Hello": "World"}
 
-@app.get("/skillz")
-def read_skillz():
-    if os.path.exists("/skillz"):
-        return {"skillz_contents": os.listdir("/skillz")}
-    else:
+@app.get("/skills")
+def list_skills():
+    skills_dir = Path("/skillz")
+    if not skills_dir.is_dir():
         return {"error": "skillz directory not found"}
+
+    skills = []
+    for skill_dir in skills_dir.iterdir():
+        if skill_dir.is_dir():
+            skill_file_path = skill_dir / "SKILL.md"
+            if skill_file_path.is_file():
+                try:
+                    post = frontmatter.load(skill_file_path)
+                    skills.append({
+                        "name": post.get("name"),
+                        "description": post.get("description"),
+                        "skill_id": skill_dir.name
+                    })
+                except Exception as e:
+                    # Ignore files that don't have valid frontmatter
+                    pass
+    return {"skills": skills}
+
+@app.get("/skills/{skill_id}/{file_path:path}")
+def get_skill_file(skill_id: str, file_path: str):
+    skill_dir = Path("/skillz") / skill_id
+    if not skill_dir.is_dir():
+        raise HTTPException(status_code=404, detail="Skill not found")
+
+    file = skill_dir / file_path
+    if not file.is_file():
+        raise HTTPException(status_code=404, detail="File not found")
+
+    with open(file, "r") as f:
+        return {"content": f.read()}
