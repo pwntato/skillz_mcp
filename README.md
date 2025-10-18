@@ -18,8 +18,8 @@ To set up and run the MCP server, ensure you have Docker and Docker Compose inst
 
 1.  **Clone the repository:**
     ```bash
-    git clone <your-repo-url>
-    cd <your-repo-name>
+    git clone https://github.com/pwntato/skillz_mcp
+    cd skillz_mcp
     ```
 
 2.  **Start the server:**
