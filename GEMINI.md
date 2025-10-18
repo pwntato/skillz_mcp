@@ -33,3 +33,4 @@ To create a new skill:
 ## Maintaining this file
 
 This file should be kept up-to-date with any changes to the project's architecture, build process, or development conventions. When making changes to the project, please update this file accordingly.
+*   The `README.md` file should always be kept up-to-date with the latest project information, features, and instructions.
