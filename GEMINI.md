@@ -28,6 +28,7 @@ To create a new skill:
 1.  Create a new directory in the `skillz` directory.
 2.  Create a `SKILL.md` file in the new directory with YAML front matter for `name` and `description`.
 3.  Add any other files for the skill in the same directory and reference them in the `SKILL.md` file.
+*   New skill folders added to the `skillz` directory will be ignored by Git, except for `skillz/sample_skill/`.
 
 ## Maintaining this file
 
