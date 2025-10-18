@@ -2,12 +2,13 @@ from fastapi import FastAPI, HTTPException
 import os
 import frontmatter
 from pathlib import Path
+from fastapi.responses import RedirectResponse
 
 app = FastAPI()
 
 @app.get("/")
 def read_root():
-    return {"Hello": "World"}
+    return RedirectResponse(url="/docs")
 
 @app.get("/skills")
 def list_skills():
