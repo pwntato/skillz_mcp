@@ -40,6 +40,48 @@ The following endpoints are available:
 *   `GET /skills/{skill_id}/{file_path}`: Returns the content of a specific file for the specified skill.
 *   `GET /skills/{skill_id}/files`: Returns a list of all files for the specified skill.
 
+## Using Skills Locally
+
+The MCP server exposes skills, allowing clients to retrieve skill definitions and associated files for local execution. This enables flexible use of skills in various environments.
+
+To use a skill locally:
+
+1.  **Identify the Skill**: Use the `GET /skills` endpoint to list available skills and their `skill_id`.
+
+    ```bash
+    curl http://localhost:8000/skills
+    ```
+
+2.  **Retrieve Skill Files**: You can retrieve individual skill files using `GET /skills/{skill_id}/{file_path}`. For example, to get the `SKILL.md` for `slack-gif-creator`:
+
+    ```bash
+    curl http://localhost:8000/skills/slack-gif-creator/SKILL.md
+    ```
+
+    To get a list of all files within a skill, use `GET /skills/{skill_id}/files`:
+
+    ```bash
+    curl http://localhost:8000/skills/slack-gif-creator/files
+    ```
+
+    You can then iterate through the file list and download each file, recreating the skill's directory structure locally.
+
+3.  **Install Dependencies**: Refer to the skill's `SKILL.md` for any specific dependencies. For Python-based skills, these are typically installed via `pip`. For example, the `slack-gif-creator` skill requires:
+
+    ```bash
+    pip install pillow imageio numpy
+    ```
+
+4.  **Execute the Skill Locally**: Once the skill files are downloaded and dependencies are installed, you can execute the skill's logic in your local environment. Refer to the skill's documentation (e.g., `SKILL.md` or other files) for usage examples and entry points.
+
+    For instance, to run a Python script from a downloaded skill, you would navigate to the skill's directory and execute the script:
+
+    ```bash
+    python your_skill_script.py
+    ```
+
+
+
 ## Maintaining this file
 
 This file should be kept up-to-date with any changes to the project's architecture, build process, or development conventions. When making changes to the project, please update this file accordingly.

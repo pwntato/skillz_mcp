@@ -11,6 +11,7 @@ This project implements a Mission Control Plane (MCP) server using FastAPI, desi
 *   **Docker Compose:** Simplifies the management and orchestration of the server and its dependencies.
 *   **Hot-Reloading:** Automatic code reloading during development for a smooth workflow.
 *   **Skills Feature:** A dynamic system allowing LLMs to progressively discover and understand tools/functionalities defined in a structured `skillz` directory. The MCP server serves as a documentation hub for these skills, enabling LLMs to interpret and execute actions based on the provided skill definitions.
+*   **Local Skill Execution**: Skills exposed by the MCP can be retrieved and executed locally, providing flexibility for client-side operations. Refer to `GEMINI.md` for detailed instructions on how to use skills locally.
 
 ## Getting Started
 
