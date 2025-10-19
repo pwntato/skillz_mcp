@@ -35,7 +35,38 @@ def list_skills():
 
 @app.get("/skills/{skill_id}")
 def get_skill(skill_id: str):
-    return get_skill_file(skill_id, "SKILL.md")
+    skill_dir = Path(os.getenv("SKILLZ_DIR", "/skillz")) / skill_id
+    if not skill_dir.is_dir():
+        raise HTTPException(status_code=404, detail="Skill not found")
+
+    skill_file_path = skill_dir / "SKILL.md"
+    if not skill_file_path.is_file():
+        raise HTTPException(status_code=404, detail="SKILL.md not found")
+
+    with open(skill_file_path, "r") as f:
+        post = frontmatter.load(f)
+
+    files = []
+    for dirpath, _, filenames in os.walk(skill_dir):
+        for filename in filenames:
+            relative_path = Path(dirpath).relative_to(skill_dir) / filename
+            files.append(str(relative_path))
+    
+    return {"content": post.content, "metadata": post.metadata, "files": files}
+
+@app.get("/skills/{skill_id}/files")
+def list_skill_files(skill_id: str):
+    skill_dir = Path(os.getenv("SKILLZ_DIR", "/skillz")) / skill_id
+    if not skill_dir.is_dir():
+        raise HTTPException(status_code=404, detail="Skill not found")
+
+    files = []
+    for dirpath, _, filenames in os.walk(skill_dir):
+        for filename in filenames:
+            relative_path = Path(dirpath).relative_to(skill_dir) / filename
+            files.append(str(relative_path))
+
+    return {"files": files}
 
 @app.get("/skills/{skill_id}/{file_path:path}")
 def get_skill_file(skill_id: str, file_path: str):

@@ -38,6 +38,7 @@ The following endpoints are available:
 *   `GET /skills`: Lists all available skills.
 *   `GET /skills/{skill_id}`: Returns the content of the `SKILL.md` file for the specified skill.
 *   `GET /skills/{skill_id}/{file_path}`: Returns the content of a specific file for the specified skill.
+*   `GET /skills/{skill_id}/files`: Returns a list of all files for the specified skill.
 
 ## Maintaining this file
 

@@ -60,6 +60,25 @@ def test_get_non_existent_skill_file(client):
     assert response.json() == {"detail": "File not found"}
 
 def test_get_non_existent_skill(client):
+
     response = client.get("/skills/non_existent_skill/SKILL.md")
+
     assert response.status_code == 404
+
     assert response.json() == {"detail": "Skill not found"}
+
+
+
+
+
+def test_list_skill_files(client):
+
+    response = client.get("/skills/sample_skill/files")
+
+    assert response.status_code == 200
+
+    assert "files" in response.json()
+
+    assert "SKILL.md" in response.json()["files"]
+
+    assert "script.py" in response.json()["files"]
