@@ -33,6 +33,10 @@ def list_skills():
                     pass
     return {"skills": skills}
 
+@app.get("/skills/{skill_id}")
+def get_skill(skill_id: str):
+    return get_skill_file(skill_id, "SKILL.md")
+
 @app.get("/skills/{skill_id}/{file_path:path}")
 def get_skill_file(skill_id: str, file_path: str):
     skill_dir = Path(os.getenv("SKILLZ_DIR", "/skillz")) / skill_id
@@ -44,4 +48,5 @@ def get_skill_file(skill_id: str, file_path: str):
         raise HTTPException(status_code=404, detail="File not found")
 
     with open(file, "r") as f:
-        return {"content": f.read()}
+        post = frontmatter.load(f)
+        return {"content": post.content, "metadata": post.metadata}

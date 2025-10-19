@@ -30,6 +30,15 @@ To create a new skill:
 3.  Add any other files for the skill in the same directory and reference them in the `SKILL.md` file.
 *   New skill folders added to the `skillz` directory will be ignored by Git, except for `skillz/sample_skill/`.
 
+## API Endpoints
+
+The following endpoints are available:
+
+*   `GET /`: Redirects to the FastAPI documentation.
+*   `GET /skills`: Lists all available skills.
+*   `GET /skills/{skill_id}`: Returns the content of the `SKILL.md` file for the specified skill.
+*   `GET /skills/{skill_id}/{file_path}`: Returns the content of a specific file for the specified skill.
+
 ## Maintaining this file
 
 This file should be kept up-to-date with any changes to the project's architecture, build process, or development conventions. When making changes to the project, please update this file accordingly.

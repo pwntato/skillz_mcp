@@ -44,6 +44,14 @@ def test_get_skill_file(client):
     response = client.get("/skills/sample_skill/SKILL.md")
     assert response.status_code == 200
     assert "content" in response.json()
+    assert "metadata" in response.json()
+    assert "# Sample Skill" in response.json()["content"]
+
+def test_get_skill(client):
+    response = client.get("/skills/sample_skill")
+    assert response.status_code == 200
+    assert "content" in response.json()
+    assert "metadata" in response.json()
     assert "# Sample Skill" in response.json()["content"]
 
 def test_get_non_existent_skill_file(client):
