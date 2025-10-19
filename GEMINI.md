@@ -19,6 +19,7 @@ The server will be available at [http://localhost:8000](http://localhost:8000).
 *   The main application code is located in the `app` directory.
 *   Python dependencies are managed in the `requirements.txt` file.
 *   The `skillz` directory is mounted into the container at `/skillz` and can be used for storing and accessing data.
+*   The `tmp` directory is available for generating or copying files locally during development or agent operations. Its contents are git-ignored.
 
 ### Skills
 
@@ -90,7 +91,7 @@ For AI agents, skills are primarily instructional. The `SKILL.md` and associated
 
 1.  **Learn from `SKILL.md`**: Read and comprehend the skill's description, requirements, and usage examples.
 2.  **Access Skill Files**: If a skill's implementation involves multiple files, the agent should retrieve these files via the `GET /skills/{skill_id}/{file_path}` endpoint to understand the complete logic. It is crucial that all referenced files are accessible through this endpoint.
-3.  **Implement the Skill**: Based on the learned information and accessed files, the agent will write and execute the necessary code to perform the skill's function. Skills are not directly executable tools for the agent but rather blueprints for implementation.
+3.  **Implement the Skill**: Based on the learned information and accessed files, the agent will write and execute the necessary code to perform the skill's function. Agents should utilize the `tmp` directory for any local file generation or copying required during this process. Skills are not directly executable tools for the agent but rather blueprints for implementation.
 
 ## Maintaining this file
 

@@ -10,7 +10,7 @@ This project implements a Mission Control Plane (MCP) server using FastAPI, desi
 *   **Dockerized Deployment:** Packaged in a `python:3.11-slim` Docker container for consistent environments.
 *   **Docker Compose:** Simplifies the management and orchestration of the server and its dependencies.
 *   **Hot-Reloading:** Automatic code reloading during development for a smooth workflow.
-*   **Skills Feature:** A dynamic system allowing LLMs to progressively discover and understand tools/functionalities defined in a structured `skillz` directory. The MCP server serves as a documentation hub for these skills, enabling LLMs to interpret and execute actions based on the provided skill definitions.
+*   **Skills Feature:** A dynamic system allowing LLMs to progressively discover and understand tools/functionalities defined in a structured `skillz` directory. The MCP server serves as a documentation hub for these skills, enabling LLMs to interpret and execute actions based on the provided skill definitions. When implementing skills, agents should utilize the `tmp` directory for any local file generation or copying.
 *   **Local Skill Execution**: Skills exposed by the MCP can be retrieved and executed locally, providing flexibility for client-side operations. Refer to `GEMINI.md` for detailed instructions on how to use skills locally.
 
 ## Getting Started
@@ -44,7 +44,8 @@ To set up and run the MCP server, ensure you have Docker and Docker Compose inst
 
 The "skills" feature allows for dynamic extension of the MCP server's capabilities. Each skill is defined within its own directory under the `skillz/` folder. The MCP server acts as a repository for these skill definitions, which are then interpreted and executed by an LLM.
 
-To create a new skill, refer to the detailed instructions in `GEMINI.md` under the "Development Conventions" section.
+*   The `skillz` directory is mounted into the container at `/skillz` and can be used for storing and accessing data.
+*   The `tmp` directory is available for generating or copying files locally during development or agent operations. Its contents are git-ignored.
 
 ## Testing
 
