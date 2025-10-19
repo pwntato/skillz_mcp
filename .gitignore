@@ -32,4 +32,5 @@ dist/
 # Ignore all directories in skillz/ except sample_skill/
 skillz/*/
 !skillz/sample_skill/
+!skillz/skill-creator/
 tmp/
