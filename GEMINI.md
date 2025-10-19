@@ -82,6 +82,14 @@ To use a skill locally:
 
 
 
+## Agent Interaction with Skills
+
+For AI agents, skills are primarily instructional. The `SKILL.md` and associated files serve as documentation and code examples for the agent to understand and *implement* the skill's logic using its own capabilities. Agents are expected to:
+
+1.  **Learn from `SKILL.md`**: Read and comprehend the skill's description, requirements, and usage examples.
+2.  **Access Skill Files**: If a skill's implementation involves multiple files, the agent should retrieve these files via the `GET /skills/{skill_id}/{file_path}` endpoint to understand the complete logic. It is crucial that all referenced files are accessible through this endpoint.
+3.  **Implement the Skill**: Based on the learned information and accessed files, the agent will write and execute the necessary code to perform the skill's function. Skills are not directly executable tools for the agent but rather blueprints for implementation.
+
 ## Maintaining this file
 
 This file should be kept up-to-date with any changes to the project's architecture, build process, or development conventions. When making changes to the project, please update this file accordingly.
