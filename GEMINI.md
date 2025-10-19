@@ -35,10 +35,10 @@ To create a new skill:
 The following endpoints are available:
 
 *   `GET /`: Redirects to the FastAPI documentation.
-*   `GET /skills`: Lists all available skills.
-*   `GET /skills/{skill_id}`: Returns the content of the `SKILL.md` file for the specified skill.
-*   `GET /skills/{skill_id}/{file_path}`: Returns the content of a specific file for the specified skill.
-*   `GET /skills/{skill_id}/files`: Returns a list of all files for the specified skill.
+*   `GET /skills`: Returns an `instruction` field explaining the purpose of skills for LLMs, along with a list of all available skills.
+*   `GET /skills/{skill_id}`: Returns an `instruction` field explaining the purpose of skills for LLMs, along with the content of the `SKILL.md` file for the specified skill.
+*   `GET /skills/{skill_id}/{file_path}`: Returns an `instruction` field explaining the purpose of skills for LLMs, along with the content of a specific file for the specified skill.
+*   `GET /skills/{skill_id}/files`: Returns an `instruction` field explaining the purpose of skills for LLMs, along with a list of all files for the specified skill.
 
 ## Using Skills Locally
 
@@ -83,6 +83,8 @@ To use a skill locally:
 
 
 ## Agent Interaction with Skills
+
+Skills are designed to teach the local LLM how to perform actions itself, rather than describing a remote service. The information returned from the API (either in the skill description, the `SKILL.md` file, or both) is intended to help the LLM understand how to utilize the responses from the MCP server to implement the skill's logic.
 
 For AI agents, skills are primarily instructional. The `SKILL.md` and associated files serve as documentation and code examples for the agent to understand and *implement* the skill's logic using its own capabilities. Agents are expected to:
 

@@ -1,6 +1,10 @@
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import pytest
 from fastapi.testclient import TestClient
-from app.main import app
+from app.main import app, SKILL_INSTRUCTION_MESSAGE
 import os
 import shutil
 from pathlib import Path
@@ -36,6 +40,8 @@ def test_read_root(client):
 def test_list_skills(client):
     response = client.get("/skills")
     assert response.status_code == 200
+    assert "instruction" in response.json()
+    assert response.json()["instruction"] == SKILL_INSTRUCTION_MESSAGE
     assert "skills" in response.json()
     assert len(response.json()["skills"]) > 0
     assert response.json()["skills"][0]["skill_id"] == "sample_skill"
@@ -43,6 +49,8 @@ def test_list_skills(client):
 def test_get_skill_file(client):
     response = client.get("/skills/sample_skill/SKILL.md")
     assert response.status_code == 200
+    assert "instruction" in response.json()
+    assert response.json()["instruction"] == SKILL_INSTRUCTION_MESSAGE
     assert "content" in response.json()
     assert "metadata" in response.json()
     assert "# Sample Skill" in response.json()["content"]
@@ -50,6 +58,8 @@ def test_get_skill_file(client):
 def test_get_skill(client):
     response = client.get("/skills/sample_skill")
     assert response.status_code == 200
+    assert "instruction" in response.json()
+    assert response.json()["instruction"] == SKILL_INSTRUCTION_MESSAGE
     assert "content" in response.json()
     assert "metadata" in response.json()
     assert "# Sample Skill" in response.json()["content"]
@@ -76,7 +86,8 @@ def test_list_skill_files(client):
     response = client.get("/skills/sample_skill/files")
 
     assert response.status_code == 200
-
+    assert "instruction" in response.json()
+    assert response.json()["instruction"] == SKILL_INSTRUCTION_MESSAGE
     assert "files" in response.json()
 
     assert "SKILL.md" in response.json()["files"]

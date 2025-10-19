@@ -36,9 +36,9 @@ To set up and run the MCP server, ensure you have Docker and Docker Compose inst
 ## API Endpoints
 
 *   `/`: Redirects to the API documentation (`/docs`).
-*   `/skills`: Returns a list of available skills, including their name, description, and `skill_id` (derived from the skill's directory name).
-*   `/skills/{skill_id}/{file_path:path}`: Retrieves the content of a specific file within a given skill's directory. This is used by LLMs for progressive loading of skill details and associated scripts.
-*   `/skills/{skill_id}/files`: Retrieves a list of all files within a given skill's directory.
+*   `/skills`: Returns an `instruction` field explaining the purpose of skills for LLMs, along with a list of available skills, including their name, description, and `skill_id` (derived from the skill's directory name).
+*   `/skills/{skill_id}/{file_path:path}`: Retrieves an `instruction` field explaining the purpose of skills for LLMs, along with the content of a specific file within a given skill's directory. This is used by LLMs for progressive loading of skill details and associated scripts.
+*   `/skills/{skill_id}/files`: Returns an `instruction` field explaining the purpose of skills for LLMs, along with a list of all files within a given skill's directory.
 
 ## Skills Development
 
