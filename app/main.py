@@ -6,7 +6,13 @@ from fastapi.responses import RedirectResponse
 
 app = FastAPI()
 
-SKILL_INSTRUCTION_MESSAGE = "Skills are designed to teach the local LLM how to perform actions itself, rather than describing a remote service. The information returned is intended to help the LLM understand how to utilize the responses from the MCP server to implement the skill's logic. Agents should utilize the `tmp` directory for any local file generation or copying required during this process."
+SKILL_INSTRUCTION_MESSAGE = """Skills are designed to teach the local LLM how to perform actions itself, rather than describing a remote service. The information returned is intended to help the LLM understand how to utilize the responses from the MCP server to implement the skill's logic.
+
+To effectively use skills:
+1.  **Install Dependencies**: Ensure all necessary Python dependencies are installed by running `pip install -r requirements.txt` in your environment.
+2.  **Copy to `tmp`**: For execution, copy relevant skill scripts (e.g., `script.py`) from the skill's directory to your local `tmp` directory. This allows for temporary modifications or executions without affecting original skill files.
+3.  **Execute from `tmp`**: Run the script from the `tmp` directory, providing any required arguments. For example: `python tmp/your_script.py "arg1" "arg2"`.
+Agents should utilize the `tmp` directory for any local file generation or copying required during this process."""
 
 @app.get("/")
 def read_root():
